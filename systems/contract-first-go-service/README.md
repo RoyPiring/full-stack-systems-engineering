@@ -78,7 +78,7 @@ flowchart TD
     end
 
     subgraph Review["Strict review, decided on evidence"]
-        Accepted[(Three findings accepted, each corrected in its own commit: two-sided route test, explicit task test, YAML as a direct requirement, measured behavior in README)]
+        Accepted[(Accepted findings, each corrected in its own commit: two-sided route test, explicit task test, YAML as a direct requirement, measured behavior in README)]
         Rejected[(Two findings rejected with reasons: the default problem response already covers 413, and the measured 200, 400 and 413 bodies were complete JSON)]
         NotAgreement{{A strong review does not require agreeing with every comment; both the fixes and the refusals cite the contract, code, tests, or measured responses}}
     end
