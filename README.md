@@ -1,6 +1,6 @@
 # Full-Stack Systems Engineering
 
-[![License: MIT](https://img.shields.io/badge/license-MIT-1B4332?style=flat-square&labelColor=0d1117)](./LICENSE) [![Systems](https://img.shields.io/badge/systems-2-2F5233?style=flat-square&labelColor=0d1117)](./INDEX.md) [![Updated](https://img.shields.io/badge/updated-2026--09--27-264653?style=flat-square&labelColor=0d1117)](./INDEX.md)
+[![License: MIT](https://img.shields.io/badge/license-MIT-1B4332?style=flat-square&labelColor=0d1117)](./LICENSE) [![Systems](https://img.shields.io/badge/systems-4-2F5233?style=flat-square&labelColor=0d1117)](./INDEX.md) [![Updated](https://img.shields.io/badge/updated-2026--10--23-264653?style=flat-square&labelColor=0d1117)](./INDEX.md)
 
 > *What does it take to build the application itself, from toolchain to running service?*
 
@@ -25,5 +25,7 @@ Application and developer-facing engineering across the stack: language runtimes
 
 - **[Your First Go Service, Contract First](./systems/contract-first-go-service/)**, Go · OpenAPI 3.1.2 · RFC 9457 · Route-Parity
 - **[Build a Workstation Readiness Doctor](./systems/workstation-readiness-doctor/)**, Go · CLI · Version-Gates · Exit-Status
+- **[Your First Typed Next.js App](./systems/contract-first-typed-screen/)**, Next.js 16 · OpenAPI · Server-Only Boundary · TS2339 Red Case
+- **[Build a Cross-Platform Go Doctor](./systems/cross-platform-go-doctor/)**, Go · Fifteen Checks · Ollama qwen3:8b · Must-Fail Gate
 
 

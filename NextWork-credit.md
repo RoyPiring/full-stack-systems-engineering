@@ -5,6 +5,8 @@ This portfolio repository was built from NextWork projects, created via NextWork
 **Original NextWork projects:**
 
 - Your First Go Service, Contract First
+- Your First Typed Next.js App
+- Build a Cross-Platform Go Doctor
 - Build a Workstation Readiness Doctor
 
 ## About NextWork
