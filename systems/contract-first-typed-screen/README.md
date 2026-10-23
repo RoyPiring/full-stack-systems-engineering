@@ -23,7 +23,7 @@ flowchart TD
     classDef event fill:#7B42BC,stroke:#F4D03F,stroke-width:2px,color:#FFFFFF
     classDef io fill:#0d1117,stroke:#F4D03F,stroke-width:1.5px,color:#F4D03F,font-style:italic
 
-    Reviewer[/A reviewer who reads the history rather than watching a demonstration, and has to see when the agreement became authoritative/]
+    Reviewer[/A reviewer who has to see from the history when the agreement became authoritative, not only from the attached walkthrough/]
     Owed[/The runtime schema validation that was deliberately not built, and would be needed before the typed hop could be called checked/]
 
     subgraph Toolchain["A workspace pinned before any contract work"]
@@ -59,8 +59,9 @@ flowchart TD
     subgraph Boundary["The server kept between the browser and the service"]
         Form(EchoForm in the browser posting only to the application's own /api/echo route)
         Handler(A Route Handler receiving the request, checking the message field and forwarding it onward)
-        Client[("A server-only API client reading SERVICE_URL at request time")]
-        Loopback[("The loopback service address absent from browser code and from any public environment variable")]
+        Client[("A server-only API client reading SERVICE_URL on the server")]
+        Upstream[("The supplied Go service, reached by the Next.js server and never by the browser")]
+        Loopback[("The loopback service address, which never needs to appear in browser code or in a public environment variable")]
         BuildTime{{The server-only import is a build-time safeguard, so the upstream client cannot drift into the client module graph by accident}}
         Owns{{The browser knows the application route and the Next.js server owns where the upstream service actually lives}}
     end
@@ -119,6 +120,9 @@ flowchart TD
     Form -- "posts to" --> Handler
     Handler -- "forwards through" --> Client
     Client -- "reads, and never publishes," --> Loopback
+    Client -- "calls" --> Upstream
+    Upstream -- "answers with the shape declared in" --> Spec
+    Upstream -- "owns the empty-message rule, which is why" --> RejectValidation
     Client -- "guarded by" --> BuildTime
     Loopback -- "gives" --> Owns
     Handler -- "exercised by" --> Checks
@@ -151,7 +155,7 @@ flowchart TD
     Honest -- "read by" --> Reviewer
     Owns -- "read by" --> Reviewer
 
-    class Versions,Pinned,Docs,TwoIssues,MergedFirst,Spec,Consumed,Five,Client,Loopback,TS,Stopped,Restored,RejectCast,RejectValidation,Accepted,Published,Limit,Clock,Both datastore
+    class Versions,Pinned,Docs,TwoIssues,MergedFirst,Spec,Consumed,Five,Client,Upstream,Loopback,TS,Stopped,Restored,RejectCast,RejectValidation,Accepted,Published,Limit,Clock,Both datastore
     class Scaffold,ContractBranch,Generated,Branch,Form,Handler,Checks,Rename,Leak,Closes service
     class Reproducible,Visible,Reviewable,NoDuplicate,Attribution,Traceable,BuildTime,Owns,UserVisible,Compiler,NotLeftRed,TwoAuthorities,Decided,Honest event
     class Reviewer,Owed io

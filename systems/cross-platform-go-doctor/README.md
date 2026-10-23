@@ -4,11 +4,13 @@
 
 ## Overview
 
-I built a cross-platform readiness doctor in Go to check the local engineering toolchain and a locally hosted qwen3:8b model through Ollama. The acceptance target was fifteen named PASS results, one controlled Node failure, and a clean recovery to exit code 0. This turned machine readiness into an executable result rather than a verbal statement that the laptop appeared ready.
+I built a readiness doctor in Go that turns machine readiness into an executable result rather than a verbal statement that the laptop looks ready. The doctor is written to be cross-platform, and that is a design property rather than a demonstrated one: this run recorded Windows as the tested operating system, and a second supported platform is named as the next goal, with the Node and model requirements to stay unchanged when it is tried.
 
-I also created a private issue-to-release handover containing the source change, failure evidence, restored output, README instructions, and a short talk-track recording. The completed trail allowed another engineer to inspect why the work existed, review the implementation, rerun the doctor, and confirm the released state without relying on the original builder to explain the machine.
+The supplied baseline was committed unmodified and measured at twelve lines first. I then registered three further readiness checks through the existing shared list, so the fifteen-line result is twelve inherited checks plus three I added, reached through one command and one reporting format. Keeping the registration path rather than adding a second runner is what makes the rise from twelve to fifteen inspectable instead of a claim about the whole tool.
 
-The architecture is built across **6 phases**, anchored by **Establishing a Secure Forward-Deployed Workspace** on the input side and **Enforcing the Node 24 Readiness Standard** at the end. Each phase is listed in the Implementation section below.
+A stricter Node rule and local model checks sit behind that total. Thinking is confirmed disabled through two separate paths, `context_length` is read so an undersized context fails visibly, and a controlled Node failure proves the doctor can return a nonzero exit code and stop delivery rather than only printing successful-looking output. The stricter version parser was bounded so it could not route around that controlled failure.
+
+The architecture below traces the path from the preserved baseline and the tracked issue, through the three added checks and the must-fail harness, to the restored run and the issue-to-release handover whose every surface was inspected rather than inferred from the merge.
 
 ## Architecture
 
